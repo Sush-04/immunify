@@ -1,0 +1,95 @@
+{% extends 'navbar.html' %} {% block title %} Add Hospital Information {%
+endblock title %} {% block body %}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="display-4 text-centre text-info">Add Hospital Data</div>
+<div class="container mt-4">
+  <!-- <div class="display-4 text-centre text-info">Add Hospital Data</div> -->
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body bg-light">
+          <form action="/addhospitalinfo" method="post">
+            {% include 'message.html' %}
+            <div class="form-group">
+              <h4 class="text-centre text-info">covid data</h4>
+              <input
+                type="text"
+                class="form-control mt-2"
+                name="code"
+                placeholder="enter your Hospital code"
+                required
+              />
+              <input
+                type="text"
+                class="form-control mt-2"
+                name="name"
+                placeholder="enter your Hospital name"
+                required
+              />
+              <input
+                type="text"
+                class="form-control mt-2"
+                name="location"
+                placeholder="location"
+                required
+              />
+              <input
+                type="number"
+                class="form-control mt-2"
+                name="slot"
+                placeholder="available slots"
+                required
+              />
+              <br />
+              <button
+                class="btn btn-info"
+                type="
+              submit"
+              >
+                Add
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <h2>Existing Hospital Data</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Hospital Code</th>
+            <th>Hospital Name</th>
+            <th>Location</th>
+            <th>Available Slots</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for hospital in hospitals %}
+          <tr>
+            <td>{{ hospital.code }}</td>
+            <td>{{ hospital.name }}</td>
+            <td>{{ hospital.loc }}</td>
+            <td>{{ hospital.slot }}</td>
+            <td>
+              <a href="{{ url_for('update_hospital', code=hospital.code) }}"
+                ><i class="fas fa-edit"></i
+              ></a>
+              <a href="{{ url_for('delete_hospital', id=hospital.id) }}"
+                ><i class="fas fa-trash-alt"></i
+              ></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}
